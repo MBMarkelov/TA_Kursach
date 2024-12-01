@@ -11,7 +11,6 @@ class GARCH(ARCH):
         volatility[0] = returns.var()  # Начальная волатильность (стандартное отклонение)
 
         for t in range(1, len(returns)):
-            epsilon_t_1 = returns[t-1]  # Ошибка на предыдущем шаге
-            volatility[t] = self.alpha_0 + self.alpha_1 * epsilon_t_1**2 + self.beta_1 * volatility[t-1]**2  # Расчет волатильности
+            volatility[t] = self.alpha_0 +self.alpha_1 * returns[t - 1]**2 +self.beta_1 * volatility[t - 1] # Расчет волатильности
 
         return volatility
