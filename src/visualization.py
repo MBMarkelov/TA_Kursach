@@ -1,20 +1,26 @@
 import matplotlib.pyplot as plt
-from src.garch_model import garch_model
 
 
-def plot_results(returns, params):
-    """
-    Строит графики квадратов доходностей и волатильности GARCH.
+# Функция для визуализации
+def plot_volatility(data, volatility_arch, volatility_garch, volatility_garch_optimized):
+    plt.figure(figsize=(12, 6))
 
-    :param returns: Массив доходностей.
-    :param params: Параметры модели [omega, alpha, beta].
-    """
-    omega, alpha, beta = params
-    sigma2 = garch_model(returns, omega, alpha, beta)
+    # Строим графики для ARCH и GARCH
+    plt.plot(data.index, volatility_arch, label='Волатильность ARCH(1)', color='red', linestyle='-')
+    plt.plot(data.index, volatility_garch, label='Волатильность GARCH(1, 1)', color='blue', linestyle='-')
+    plt.plot(data.index, volatility_garch_optimized, label='Оптимизированная волатильность GARCH(1, 1)', color='green',
+             linestyle='-')
 
-    plt.figure(figsize=(10, 6))
-    plt.plot(returns.index, returns ** 2, label='Squared Returns')
-    plt.plot(returns.index, sigma2, label='GARCH Volatility', color='red')
+    # Оформляем график
+    plt.title('Волатильность на основе моделей ARCH и GARCH')
+    plt.xlabel('Дата')
+    plt.ylabel('Волатильность')
     plt.legend()
-    plt.title("GARCH Model Volatility")
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
     plt.show()
+
+
+# Пример визуализации
+#plot_volatility(data, data['Volatility_ARCH'], data['Volatility_GARCH'], data['Volatility_GARCH_Optimized'])

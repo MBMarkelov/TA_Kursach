@@ -1,8 +1,8 @@
 import pytest
 import numpy as np
 from src.fetch_data import fetch_stock_data
-from src.garch_model import garch_model
-from src.optimizer import optimize_garch
+from src.GARCH_model import garch_model
+from src.GARCHMLE import optimize_garch
 from src.visualization import plot_results
 import pandas as pd
 
