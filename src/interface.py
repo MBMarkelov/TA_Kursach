@@ -99,8 +99,9 @@ class GarchApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to run GARCH model: {e}")
 
+
     def show_results(self):
-        try:
-            plot_volatility(self.data,self.data['Volatility_ARCH'],self.data['Volatility_GARCH'],self.data['Volatility_GARCH_Optimized'])
-        except Exception as e:
-            messagebox.showerror("Error", f"Failed to show results: {e}")
+      #  try:
+        plot_volatility(self.data,self.data['Volatility_ARCH'],self.data['Volatility_GARCH'],self.data['Volatility_GARCH_Optimized'], self.data['Open'])
+     #   except Exception as e:
+        #    messagebox.showerror("Error", f"Failed to show results: {e}")
