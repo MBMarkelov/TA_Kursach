@@ -86,7 +86,7 @@ class GarchApp:
 
         try:
             # Пример использования модели GARCH(1, 1)
-            alpha_0 = 0.0001  # Константа
+            alpha_0 = 0.00013  # Константа
             alpha_1 = 0.1  # Коэффициент для прошлых ошибок
             beta_1 = 0.8  # Коэффициент для прошлой волатильности
 
@@ -101,7 +101,7 @@ class GarchApp:
 
 
     def show_results(self):
-      #  try:
-        plot_volatility(self.data,self.data['Volatility_ARCH'],self.data['Volatility_GARCH'],self.data['Volatility_GARCH_Optimized'], self.data['Open'])
-     #   except Exception as e:
-        #    messagebox.showerror("Error", f"Failed to show results: {e}")
+        try:
+             plot_volatility(self.data,self.data['Volatility_ARCH'],self.data['Volatility_GARCH'],self.data['Volatility_GARCH_Optimized'], self.data['Open'])
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to show results: {e}")

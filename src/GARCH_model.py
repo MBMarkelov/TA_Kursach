@@ -12,5 +12,4 @@ class GARCH(ARCH):
 
         for t in range(1, len(returns)):
             volatility[t] = self.alpha_0 +self.alpha_1 * returns[t - 1]**2 +self.beta_1 * volatility[t - 1] # Расчет волатильности
-
         return volatility

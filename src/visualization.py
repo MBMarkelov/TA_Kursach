@@ -11,12 +11,26 @@ def plot_volatility(data, volatility_arch, volatility_garch, volatility_garch_op
     axs[0].plot(data.index, volatility_garch_optimized, label='Оптимизированная волатильность GARCH(1, 1)', color='green',
              linestyle='-')
 
+    min_treshold = max(volatility_garch_optimized) - max(volatility_garch_optimized) * 0.3
+    high_vol_periods = [i for i, vol in enumerate(volatility_garch_optimized) if vol > min_treshold]
+
+    # Преобразовать индексы в даты
+    high_vol_dates = [data.index[i] for i in high_vol_periods]  # data.index должен содержать даты
+
+
     # Оформляем график
     axs[0].set_title('Волатильность на основе моделей ARCH и GARCH')
     axs[0].set_xlabel('Дата')
     axs[0].set_ylabel('Волатильность')
     axs[0].legend()
     axs[0].grid(True)
+    # Найти периоды высокой волатильности по датам
+    for start, end in zip(high_vol_dates[:-1], high_vol_dates[1:]):
+        # Проверить, что периоды идут подряд
+        if (end - start).days <= 1:  # Проверка на подряд идущие дни
+            axs[0].axvspan(start, end, color='red', alpha=0.2, label='High Volatility Period')
+            axs[1].axvspan(start, end, color='red', alpha=0.2)
+
 
     axs[1].plot(prices, label="Ticker Price", color="green")
     axs[1].set_title("Price of the Ticker")
