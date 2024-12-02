@@ -9,6 +9,9 @@ from src.GARCHMLE import GARCHMLE
 
 
 class GarchApp:
+    """
+    Графическое приложение для анализа волатильности с использованием моделей ARCH, GARCH и оптимизированной GARCH.
+    """
     def __init__(self, root):
         self.root = root
         self.root.title("GARCH Model Analysis")
@@ -25,9 +28,6 @@ class GarchApp:
         tk.Button(root, text="Run GARCH optimizer Model", command=self.run_garchOpti).pack(pady=5)
         tk.Button(root, text="Show Results", command=self.show_results).pack(pady=5)
 
-        self.result_text = tk.Text(root, height=10, width=50)
-        self.result_text.pack(pady=10)
-
     def run_garchOpti(self):
         alpha_0, alpha_1, beta_1 = 0.0001, 0.1, 0.8
 
@@ -42,7 +42,6 @@ class GarchApp:
         if not ticker:
             messagebox.showerror("Error", "Please enter a stock ticker.")
             return
-
         try:
             self.data = fetch_stock_data(ticker)
             messagebox.showinfo("Success", f"Data for {ticker} loaded successfully!")
@@ -67,7 +66,6 @@ class GarchApp:
         if not hasattr(self, 'data'):
             messagebox.showerror("Error", "No data loaded. Please fetch data first.")
             return
-
         try:
             alpha_0 = 0.00013
             alpha_1 = 0.1
@@ -79,9 +77,12 @@ class GarchApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to run GARCH model: {e}")
 
-
     def show_results(self):
         try:
-             plot_volatility(self.data,self.data['Volatility_ARCH'],self.data['Volatility_GARCH'],self.data['Volatility_GARCH_Optimized'], self.data['Open'])
+             plot_volatility(self.data,
+                             self.data['Volatility_ARCH'],
+                             self.data['Volatility_GARCH'],
+                             self.data['Volatility_GARCH_Optimized'],
+                             self.data['Open'])
         except Exception as e:
             messagebox.showerror("Error", f"Failed to show results: {e}")

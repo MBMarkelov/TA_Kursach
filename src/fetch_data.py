@@ -1,6 +1,6 @@
 import yfinance as yf
 
-def fetch_stock_data(ticker, start_date="2020-01-01", end_date="2022-01-01", save_to_csv=True):
+def fetch_stock_data(ticker, start_date="2022-01-01", end_date="2024-01-01", save_to_csv=True):
     """
     Загружает исторические данные по акции с помощью yfinance.
 
