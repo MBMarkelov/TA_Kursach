@@ -11,7 +11,7 @@ def plot_volatility(data, volatility_arch, volatility_garch, volatility_garch_op
     axs[0].plot(data.index, volatility_garch_optimized, label='Оптимизированная волатильность GARCH(1, 1)', color='green',
              linestyle='-')
 
-    min_treshold = max(volatility_garch_optimized) - max(volatility_garch_optimized) * 0.3
+    min_treshold = max(volatility_garch_optimized) - max(volatility_garch_optimized) * 0.35
     high_vol_periods = [i for i, vol in enumerate(volatility_garch_optimized) if vol > min_treshold]
 
     # Преобразовать индексы в даты
